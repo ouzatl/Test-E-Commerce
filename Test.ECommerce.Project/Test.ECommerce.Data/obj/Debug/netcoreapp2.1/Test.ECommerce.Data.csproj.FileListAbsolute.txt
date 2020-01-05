@@ -1,0 +1,11 @@
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\bin\Debug\netcoreapp2.1\Test.ECommerce.Data.deps.json
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\bin\Debug\netcoreapp2.1\Test.ECommerce.Data.runtimeconfig.json
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\bin\Debug\netcoreapp2.1\Test.ECommerce.Data.runtimeconfig.dev.json
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\bin\Debug\netcoreapp2.1\Test.ECommerce.Data.dll
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\bin\Debug\netcoreapp2.1\Test.ECommerce.Data.pdb
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.csprojAssemblyReference.cache
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.csproj.CoreCompileInputs.cache
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.AssemblyInfoInputs.cache
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.AssemblyInfo.cs
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.dll
+C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\obj\Debug\netcoreapp2.1\Test.ECommerce.Data.pdb
