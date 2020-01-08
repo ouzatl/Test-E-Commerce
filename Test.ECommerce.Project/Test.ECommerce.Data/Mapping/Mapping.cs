@@ -9,6 +9,8 @@ namespace Test.ECommerce.Data.Mapping
         public Mapping()
         {
             CreateMap<Product, ProductContract>().ReverseMap();
+            CreateMap<Category, CategoryContract>().ReverseMap();
+            CreateMap<Basket, BasketContract>().ReverseMap();
         }
     }
 }

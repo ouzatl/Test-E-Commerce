@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,7 +13,11 @@ using Test.ECommerce.Common.Config;
 using Test.ECommerce.Common.NLog;
 using Test.ECommerce.Data;
 using Test.ECommerce.Data.Mapping;
+using Test.ECommerce.Data.Repositories.BasketRepository;
+using Test.ECommerce.Data.Repositories.CategoryRepository;
 using Test.ECommerce.Data.Repositories.ProductRepository;
+using Test.ECommerce.Service.BasketService;
+using Test.ECommerce.Service.CategoryService;
 using Test.ECommerce.Service.ProductService;
 
 namespace Test.ECommerce.API
@@ -46,6 +51,12 @@ namespace Test.ECommerce.API
             //In-Memory Cache
             services.AddMemoryCache();
 
+            services.AddDistributedMemoryCache();
+            //Session
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(60);  
+            });
+
             //ConnectionString
             services.AddDbContext<TestECommerceContext>(options => options.UseSqlServer(Configuration["dbConnection"]));
 
@@ -63,11 +74,15 @@ namespace Test.ECommerce.API
             //NLog
             services.AddSingleton<ILog, LogNLog>();
 
-            //Dependency Service
+            //Dependency Services
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBasketService, BasketService>();
 
-            //Dependency Repository
+            //Dependency Repositories
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
 
             //Mapping
             services.AddAutoMapper(x => x.AddProfile(new Mapping()));
@@ -91,7 +106,7 @@ namespace Test.ECommerce.API
             {
                 app.UseHsts();
             }
-
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
