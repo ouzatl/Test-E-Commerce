@@ -20,7 +20,7 @@ namespace Test.ECommerce.Service.ProductService
 
         public List<Product> GetAllProducts()
         {
-            var result = _productRepository.GetAll().ToList();
+            var result = _productRepository.GetAll().Where(x=>x.IsActive == true && x.StockCount > 0).ToList();
 
             return result;
         }

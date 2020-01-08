@@ -10,8 +10,8 @@ using Test.ECommerce.Data;
 namespace Test.ECommerce.Data.Migrations
 {
     [DbContext(typeof(TestECommerceContext))]
-    [Migration("20200102205502_2020_01_01_migration")]
-    partial class _2020_01_01_migration
+    [Migration("20200107223355_rrqewrq32")]
+    partial class rrqewrq32
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,31 @@ namespace Test.ECommerce.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Test.ECommerce.Data.Models.Basket", b =>
+                {
+                    b.Property<int>("BasketId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BasketKey");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("ProductCode");
+
+                    b.Property<double>("ProductPrice");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("BasketId");
+
+                    b.ToTable("Baskets");
+                });
 
             modelBuilder.Entity("Test.ECommerce.Data.Models.Category", b =>
                 {
@@ -56,7 +81,7 @@ namespace Test.ECommerce.Data.Migrations
 
                     b.Property<double>("ProductPrice");
 
-                    b.Property<long>("StockCount");
+                    b.Property<long?>("StockCount");
 
                     b.HasKey("ProductCode");
 
