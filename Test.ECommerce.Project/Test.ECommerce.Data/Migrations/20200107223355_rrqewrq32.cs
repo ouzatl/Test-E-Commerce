@@ -1,12 +1,32 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Test.ECommerce.Data.Migrations
 {
-    public partial class enablemigrations : Migration
+    public partial class rrqewrq32 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Baskets",
+                columns: table => new
+                {
+                    BasketId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CustomerId = table.Column<int>(nullable: false),
+                    BasketKey = table.Column<string>(nullable: true),
+                    ProductCode = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    ProductPrice = table.Column<double>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    IsActive = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Baskets", x => x.BasketId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
@@ -30,7 +50,7 @@ namespace Test.ECommerce.Data.Migrations
                     ProductName = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     ProductPrice = table.Column<double>(nullable: false),
-                    StockCount = table.Column<long>(nullable: false),
+                    StockCount = table.Column<long>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     ModifiedDate = table.Column<DateTime>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false)
@@ -54,6 +74,9 @@ namespace Test.ECommerce.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Baskets");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

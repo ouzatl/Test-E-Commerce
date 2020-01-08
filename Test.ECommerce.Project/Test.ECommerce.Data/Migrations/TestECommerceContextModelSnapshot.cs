@@ -19,6 +19,31 @@ namespace Test.ECommerce.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Test.ECommerce.Data.Models.Basket", b =>
+                {
+                    b.Property<int>("BasketId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BasketKey");
+
+                    b.Property<DateTime>("CreatedDate");
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<bool>("IsActive");
+
+                    b.Property<string>("ProductCode");
+
+                    b.Property<double>("ProductPrice");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("BasketId");
+
+                    b.ToTable("Baskets");
+                });
+
             modelBuilder.Entity("Test.ECommerce.Data.Models.Category", b =>
                 {
                     b.Property<string>("CategoryCode")
@@ -54,7 +79,7 @@ namespace Test.ECommerce.Data.Migrations
 
                     b.Property<double>("ProductPrice");
 
-                    b.Property<long>("StockCount");
+                    b.Property<long?>("StockCount");
 
                     b.HasKey("ProductCode");
 

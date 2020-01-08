@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using Test.ECommerce.Common.Config;
+using Test.ECommerce.Common.Constants;
 using Test.ECommerce.Common.Enum;
 using Test.ECommerce.Common.Enum.Product;
 using Test.ECommerce.Common.NLog;
@@ -46,11 +47,24 @@ namespace Test.ECommerce.API.Controllers
         {
             try
             {
-                var result = _mapper.Map<List<ProductContract>>(_productService.GetAllProducts());
-                if (result == null)
-                    return NotFound();
+                var cacheKey = ProductConstants.GETALLPRODUCT;
 
-                return Ok(result);
+                if (!_memoryCache.TryGetValue(cacheKey, out List<ProductContract> productContract))
+                {
+
+                    var result = _mapper.Map<List<ProductContract>>(_productService.GetAllProducts());
+                    if (result == null)
+                        return NotFound();
+
+                    var cacheExpirationOptions = new MemoryCacheEntryOptions
+                    {
+                        AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                        Priority = CacheItemPriority.Normal
+                    };
+                    _memoryCache.Set(cacheKey, productContract, cacheExpirationOptions);
+                }
+
+                return Ok(productContract);
             }
             catch (Exception ex)
             {
@@ -80,7 +94,7 @@ namespace Test.ECommerce.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetByCategoryCode")]
+        [Route("GetProductByCategoryCode")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<ProductContract>))]
         public IActionResult GetByCategoryCode(string categoryCode)
         {
@@ -95,7 +109,7 @@ namespace Test.ECommerce.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.Error($"GetByCategoryCode :{ex} - {new Dictionary<string, string> { { "categoryCode", categoryCode } }}");
+                _logger.Error($"GetProductByCategoryCode :{ex} - {new Dictionary<string, string> { { "categoryCode", categoryCode } }}");
                 return BadRequest();
             }
         }
