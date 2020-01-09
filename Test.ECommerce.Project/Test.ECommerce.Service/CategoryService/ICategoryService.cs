@@ -1,17 +1,15 @@
 ﻿using System.Collections.Generic;
-using Test.ECommerce.Data.Models;
+using Test.ECommerce.Data.Contract;
 
 namespace Test.ECommerce.Service.CategoryService
 {
     public interface ICategoryService
     {
-        List<Category> GetAllCategory();
+        List<CategoryContract> GetAllCategory();
 
-        Category GetByCategoryCode(string categoryCode);
+        void AddCategory(CategoryContract categoryContract);
 
-        void AddCategory(Category category);
-
-        void UpdateCategory(Category category);
+        void UpdateCategory(CategoryContract categoryContract);
 
         void DeleteCategory(string categoryCode);
     }

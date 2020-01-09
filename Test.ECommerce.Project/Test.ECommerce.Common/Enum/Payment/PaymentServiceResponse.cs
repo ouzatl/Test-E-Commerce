@@ -1,8 +1,8 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Test.ECommerce.Common.Enum.Basket
+namespace Test.ECommerce.Common.Enum.Payment
 {
-    public enum BasketServiceResponse
+    public enum PaymentServiceResponse
     {
         [EnumMember]
         Exception = 0,
@@ -12,11 +12,5 @@ namespace Test.ECommerce.Common.Enum.Basket
 
         [EnumMember]
         NotFound = -1,
-
-        [EnumMember]
-        MaxStock = -2,
-
-        [EnumMember]
-        QuantityNegative = -3,
     }
 }

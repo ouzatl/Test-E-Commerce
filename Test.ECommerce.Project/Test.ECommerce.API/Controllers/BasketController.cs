@@ -58,7 +58,7 @@ namespace Test.ECommerce.API.Controllers
         [HttpPost]
         [Route("AddProductInBasket")]
         [ProducesResponseType(typeof(ServiceResponse<BasketServiceResponse, BasketContract>), 200)]
-        public IActionResult AddProductInBasket([FromBody] string productCode, int? customerId)
+        public IActionResult AddProductInBasket([FromBody] string productCode)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace Test.ECommerce.API.Controllers
                     if (index != -1)
                     {
                         if (cart[index].Quantity >= product.StockCount )
-                            return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.MaxStock));
+                            return Ok(new ServiceResponse<BasketServiceResponse, OrderItem>(BasketServiceResponse.MaxStock, BasketServiceResponse.MaxStock.ToString()));
 
                         cart[index].Quantity++;
                     }
@@ -88,11 +88,11 @@ namespace Test.ECommerce.API.Controllers
                     SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
                 }
 
-                return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.Success));
+                return Ok(new ServiceResponse<BasketServiceResponse, OrderItem>(BasketServiceResponse.Success));
             }
             catch (Exception ex)
             {
-                _logger.Error($"DeleteProductInBasket :{ex} - {new Dictionary<string, string> { { "productCode", productCode }, { "customerId", customerId.ToString() } }}");
+                _logger.Error($"DeleteProductInBasket :{ex} - {new Dictionary<string, string> { { "productCode", productCode }}}");
                 return BadRequest(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.Exception));
             }
         }
@@ -100,10 +100,13 @@ namespace Test.ECommerce.API.Controllers
         [HttpPost]
         [Route("UpdateProductInBasket")]
         [ProducesResponseType(typeof(ServiceResponse<BasketServiceResponse, BasketContract>), 200)]
-        public IActionResult UpdateProductInBasket([FromBody] string productCode, int? customerId, int quantity)
+        public IActionResult UpdateProductInBasket([FromBody] string productCode, int quantity)
         {
             try
             {
+                if (quantity < 0)
+                    return Ok(new ServiceResponse<BasketServiceResponse, OrderItem>(BasketServiceResponse.QuantityNegative, BasketServiceResponse.QuantityNegative.ToString()));
+
                 if (SessionHelper.GetObjectFromJson<List<OrderItem>>(HttpContext.Session, "cart") != null)
                 {
                     var getProduct = _productService.GetByProductCode(productCode);
@@ -112,7 +115,7 @@ namespace Test.ECommerce.API.Controllers
                     if (index != -1)
                     {
                         if (cart[index].Quantity >= getProduct.StockCount)
-                            return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.MaxStock));
+                            return Ok(new ServiceResponse<BasketServiceResponse, OrderItem>(BasketServiceResponse.MaxStock, BasketServiceResponse.MaxStock.ToString()));
 
                         cart[index].Quantity = quantity;
                     }
@@ -121,11 +124,11 @@ namespace Test.ECommerce.API.Controllers
                     return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.Success));
                 }
 
-                return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.NotFound));
+                return Ok(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.Exception));
             }
             catch (Exception ex)
             {
-                _logger.Error($"DeleteProductInBasket :{ex} - {new Dictionary<string, string> { { "productCode", productCode }, { "customerId", customerId.ToString() } }}");
+                _logger.Error($"DeleteProductInBasket :{ex} - {new Dictionary<string, string> { { "productCode", productCode }}}");
                 return BadRequest(new ServiceResponse<BasketServiceResponse, BasketContract>(BasketServiceResponse.Exception));
             }
         }

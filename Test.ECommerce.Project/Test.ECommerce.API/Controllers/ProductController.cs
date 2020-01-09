@@ -52,8 +52,8 @@ namespace Test.ECommerce.API.Controllers
                 if (!_memoryCache.TryGetValue(cacheKey, out List<ProductContract> productContract))
                 {
 
-                    var result = _mapper.Map<List<ProductContract>>(_productService.GetAllProducts());
-                    if (result == null)
+                    productContract = _productService.GetAllProducts();
+                    if (productContract == null)
                         return NotFound();
 
                     var cacheExpirationOptions = new MemoryCacheEntryOptions
@@ -80,7 +80,7 @@ namespace Test.ECommerce.API.Controllers
         {
             try
             {
-                var result = _mapper.Map<ProductContract>(_productService.GetByProductCode(productCode));
+                var result = _productService.GetByProductCode(productCode);
                 if (result != null)
                     return Ok(result);
 
@@ -100,7 +100,7 @@ namespace Test.ECommerce.API.Controllers
         {
             try
             {
-                var result = _mapper.Map<ProductContract>(_productService.GetProductListByCategoryCode(categoryCode));
+                var result = _productService.GetProductListByCategoryCode(categoryCode);
 
                 if (result != null)
                     return Ok(result);
@@ -122,9 +122,7 @@ namespace Test.ECommerce.API.Controllers
             try
             {
                 //var validate = ProductValidate(product);
-                var productData = _mapper.Map<Product>(product);
-
-                _productService.AddProduct(productData);
+                _productService.AddProduct(product);
 
                 return Ok(new ServiceResponse<ProductServiceResponse, ProductContract>(ProductServiceResponse.Success));
             }
@@ -167,8 +165,7 @@ namespace Test.ECommerce.API.Controllers
             {
                 if (product != null)
                 {
-                    var productData = _mapper.Map<Product>(product);
-                    _productService.UpdateProduct(productData);
+                    _productService.UpdateProduct(product);
 
                     return Ok(new ServiceResponse<ProductServiceResponse, ProductContract>(ProductServiceResponse.Success));
                 }

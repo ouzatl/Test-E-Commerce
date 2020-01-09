@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
+using Test.ECommerce.Data.Contract;
 using Test.ECommerce.Data.Models;
 
 namespace Test.ECommerce.Service.ProductService
 {
     public interface IProductService
     {
-        List<Product> GetAllProducts();
+        List<ProductContract> GetAllProducts();
 
-        Product GetByProductCode(string productCode);
+        ProductContract GetByProductCode(string productCode);
 
-        List<Product> GetProductListByCategoryCode(string categoryCode);
+        List<ProductContract> GetProductListByCategoryCode(string categoryCode);
 
-        void AddProduct(Product product);
+        void AddProduct(ProductContract productContract);
 
-        void UpdateProduct(Product product);
+        void UpdateProduct(ProductContract productContract);
 
-        void DeleteProduct(string product);
+        void DeleteProduct(string productCode);
     }
 }

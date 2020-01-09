@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using AutoMapper;
+using System.Collections.Generic;
 using System.Linq;
 using Test.ECommerce.Common.NLog;
+using Test.ECommerce.Data.Contract;
 using Test.ECommerce.Data.Models;
 using Test.ECommerce.Data.Repositories.CategoryRepository;
 
@@ -10,35 +12,31 @@ namespace Test.ECommerce.Service.CategoryService
     {
         private ICategoryRepository _categoryRepository;
         private readonly ILog _logger;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository, ILog logger)
+        public CategoryService(ICategoryRepository categoryRepository, ILog logger, IMapper mapper)
         {
             _categoryRepository = categoryRepository;
             _logger = logger;
+            _mapper = mapper;
         }
 
-        public List<Category> GetAllCategory()
+        public List<CategoryContract> GetAllCategory()
         {
-            var result = _categoryRepository.GetAll().ToList();
+            var result = _mapper.Map<List<CategoryContract>>(_categoryRepository.GetAll().ToList());
 
             return result;
         }
 
-        public Category GetByCategoryCode(string categoryCode)
+        public void AddCategory(CategoryContract categoryContract)
         {
-            if (!string.IsNullOrEmpty(categoryCode))
-                return _categoryRepository.GetById(categoryCode);
-
-            return null;
-        }
-
-        public void AddCategory(Category category)
-        {
+            var category = _mapper.Map<Category>(categoryContract);
             _categoryRepository.Add(category);
         }
 
-        public void UpdateCategory(Category category)
+        public void UpdateCategory(CategoryContract categoryContract)
         {
+            var category = _mapper.Map<Category>(categoryContract);
             _categoryRepository.Update(category);
         }
 

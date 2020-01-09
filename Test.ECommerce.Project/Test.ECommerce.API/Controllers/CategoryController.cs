@@ -49,7 +49,7 @@ namespace Test.ECommerce.API.Controllers
         {
             try
             {
-                var result = _mapper.Map<List<CategoryContract>>(_categoryService.GetAllCategory());
+                var result = _categoryService.GetAllCategory();
                 if (result == null)
                     return NotFound();
 
@@ -69,9 +69,7 @@ namespace Test.ECommerce.API.Controllers
         {
             try
             {
-                var categoryData = _mapper.Map<Category>(category);
-
-                _categoryService.AddCategory(categoryData);
+                _categoryService.AddCategory(category);
 
                 return Ok(new ServiceResponse<CategoryServiceResponse, CategoryContract>(CategoryServiceResponse.Success));
             }
@@ -92,8 +90,7 @@ namespace Test.ECommerce.API.Controllers
             {
                 if (category != null)
                 {
-                    var categoryData = _mapper.Map<Category>(category);
-                    _categoryService.UpdateCategory(categoryData);
+                    _categoryService.UpdateCategory(category);
 
                     return Ok(new ServiceResponse<CategoryServiceResponse, CategoryContract>(CategoryServiceResponse.Success));
                 }
