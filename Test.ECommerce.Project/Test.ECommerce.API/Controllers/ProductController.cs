@@ -201,5 +201,23 @@ namespace Test.ECommerce.API.Controllers
                 return BadRequest(new ServiceResponse<ProductServiceResponse, ProductContract>(ProductServiceResponse.Exception));
             }
         }
+
+        [HttpGet]
+        [Route("SearchProduct")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<ProductContract>))]
+        public IActionResult SearchProduct(string keyword)
+        {
+            try
+            {
+                var productList =_productService.SearchProduct(keyword);
+
+                return Ok(productList);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"SearchProduct :{ex}");
+                return BadRequest();
+            }
+        }
     }
 }

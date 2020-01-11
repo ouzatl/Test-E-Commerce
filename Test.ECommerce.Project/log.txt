@@ -88,3 +88,16 @@ The statement has been terminated.
    at Test.ECommerce.Data.Repositories.BaseRepository`1.Add(T entity) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Data\Repositories\BaseRepository.cs:line 37
    at Test.ECommerce.Service.CategoryService.CategoryService.AddCategory(CategoryContract categoryContract) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Service\CategoryService\CategoryService.cs:line 34
    at Test.ECommerce.API.Controllers.CategoryController.Add(CategoryContract category) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.API\Controllers\CategoryController.cs:line 72 - System.Collections.Generic.Dictionary`2[System.String,Test.ECommerce.Data.Contract.CategoryContract]
+2020-01-11 00:18:22.5214 ERROR SearchProduct System.NullReferenceException: Object reference not set to an instance of an object.
+   at Test.ECommerce.Service.ProductService.ProductService.SearchProduct(String keyword) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Service\ProductService\ProductService.cs:line 76
+2020-01-11 00:22:27.0484 ERROR SearchProduct System.NullReferenceException: Object reference not set to an instance of an object.
+   at Test.ECommerce.Common.Helpers.LuceneEngine.AddToIndex(IEnumerable values) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Common\Helpers\LuceneEngine.cs:line 42
+   at Test.ECommerce.Service.ProductService.ProductService.SearchProduct(String keyword) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Service\ProductService\ProductService.cs:line 76
+2020-01-11 00:22:50.0980 ERROR SearchProduct System.NullReferenceException: Object reference not set to an instance of an object.
+   at Test.ECommerce.Common.Helpers.LuceneEngine.AddToIndex(IEnumerable values) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Common\Helpers\LuceneEngine.cs:line 42
+   at Test.ECommerce.Service.ProductService.ProductService.SearchProduct(String keyword) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Service\ProductService\ProductService.cs:line 76
+2020-01-11 00:25:02.7397 ERROR SearchProduct System.NullReferenceException: Object reference not set to an instance of an object.
+   at Test.ECommerce.Common.Helpers.LuceneEngine.AddToIndex(IEnumerable values) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Common\Helpers\LuceneEngine.cs:line 42
+   at Test.ECommerce.Service.ProductService.ProductService.SearchProduct(String keyword) in C:\Users\Oğuz\Desktop\Test-E-Commerce\Test.ECommerce.Project\Test.ECommerce.Service\ProductService\ProductService.cs:line 76
+2020-01-12 02:07:10.7635 ERROR SearchProduct System.NullReferenceException: Object reference not set to an instance of an object.
+   at Test.ECommerce.Service.ProductService.ProductService.SearchProduct(String keyword)

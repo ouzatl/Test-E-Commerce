@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Test.ECommerce.Common.NLog;
+using Test.ECommerce.Common.Helpers;
 using Test.ECommerce.Data.Contract;
 using Test.ECommerce.Data.Models;
 using Test.ECommerce.Data.Repositories.ProductRepository;
@@ -63,6 +64,29 @@ namespace Test.ECommerce.Service.ProductService
         public void DeleteProduct(string productCode)
         {
             _productRepository.Delete(productCode);
+        }
+
+        //Sadece productName field'ının içindeki kelimeleri bulan search mekanızması.
+        public List<ProductContract> SearchProduct(string keyword)
+        {
+            try
+            {
+                var engine = new LuceneEngine();
+
+                //Klasör içine product datasını text olarak yazması için bir kere çalıştırılması yeterlidir. Burasını geliştir.
+                //var allProductList = _mapper.Map<List<ProductContract>>(_productRepository.GetAll().Where(x => x.IsActive == true && x.StockCount > 0).ToList());
+                //engine.AddToIndex(allProductList);
+
+                var result = engine.SearchProduct("ProductName", keyword);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"SearchProduct {ex}");
+            }
+
+            return null;
         }
     }
 }

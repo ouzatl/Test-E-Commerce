@@ -17,5 +17,7 @@ namespace Test.ECommerce.Service.ProductService
         void UpdateProduct(ProductContract productContract);
 
         void DeleteProduct(string productCode);
+
+        List<ProductContract> SearchProduct(string keyword);
     }
 }
